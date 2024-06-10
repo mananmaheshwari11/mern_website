@@ -8,7 +8,7 @@ import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import cors from 'cors';
 import path from 'path';
-import exp from "constants";
+import { fileURLToPath } from "url";
 
 
 dotenv.config();
@@ -18,6 +18,9 @@ const app = express();
 // database connection
 connectDB();
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // middlewares
 app.use(cors());
@@ -32,7 +35,7 @@ app.use('/api/v1/product',productRoutes)
 
 
 app.use("*",function(req,res){
-    res.sendFile(path.join(__filename,'./ecommerce/build/index.html'))
+    res.sendFile(path.join(__dirname,'./ecommerce/build/index.html'))
 })
 
 //port feature
